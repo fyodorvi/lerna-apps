@@ -10,7 +10,7 @@
   "scripts": {
     "build": "tsc",
     "watch": "concurrently --kill-others \"yarn npm-watch\" \"tsc -w\"",
-    "refresh-sample-project": "./refresh-sample-project.sh",
+    "refresh-sample-project": "./refresh-sample-project.sh"
   },
   "dependencies": {
   },
