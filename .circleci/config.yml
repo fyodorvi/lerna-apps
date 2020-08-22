@@ -45,6 +45,7 @@ workflows:
             branches:
               ignore:
                 - master
+                - beta
   Master:
     jobs:
       - publish:
@@ -52,3 +53,4 @@ workflows:
             branches:
               only:
                 - master
+                - beta

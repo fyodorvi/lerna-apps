@@ -1,7 +1,7 @@
 {
   "name": "lerna-apps",
   "bin": "build/lerna-apps.js",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "A CLI tool enabling comfortable lerna use for Applications rather than NPM Packages.",
   "main": "index.js",
   "author": "Fyodor Yakimchouk",
@@ -27,6 +27,6 @@
     "semantic-release": "^17.1.1"
   },
   "release": {
-    "branches": ["master", "next"]
+    "branches": ["master", {"name": "beta", "prerelease": true}]
   }
 }
