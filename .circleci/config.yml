@@ -21,7 +21,7 @@ jobs:
           command: yarn build
       - run:
           name: Release
-          command: yarn semantic-release
+          command: yarn semantic-release --ci
   build:
     executor: default
     steps:
