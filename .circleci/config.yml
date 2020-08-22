@@ -1,0 +1,54 @@
+executors:
+  default:
+    docker:
+      - image: circleci/node
+
+################################################################################
+# JOBS
+################################################################################
+
+version: 2.1
+jobs:
+  publish:
+    executor: default
+    steps:
+      - checkout
+      - run:
+          name: Install Dependencies
+          command: yarn install
+      - run:
+          name: Build
+          command: yarn build
+      - run:
+          name: Release
+          command: yarn semantic-release
+  build:
+    executor: default
+    steps:
+      - checkout
+      - run:
+          name: Install Dependencies
+          command: yarn install
+      - run:
+          name: Build
+          command: yarn build
+
+################################################################################
+# WORKFLOWS
+################################################################################
+workflows:
+  version: 2
+  PR:
+    jobs:
+      - build:
+          filters:
+            branches:
+              ignore:
+                - master
+  Master:
+    jobs:
+      - publish:
+          filters:
+            branches:
+              only:
+                - master
