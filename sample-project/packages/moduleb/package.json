@@ -1,0 +1,27 @@
+{
+  "name": "moduleb",
+  "version": "0.0.0",
+  "description": "> TODO: description",
+  "author": "fyodor <fyodor@roamltd.com>",
+  "homepage": "",
+  "license": "MIT",
+  "main": "lib/moduleB.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "publishConfig": {
+    "registry": "https://registry.yarnpkg.com"
+  },
+  "scripts": {
+    "start": "node lib/moduleB.js",
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "dependencies": {
+    "modulea": "^0.0.0",
+    "moment": "^2.27.0"
+  }
+}
