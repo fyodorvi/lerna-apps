@@ -1,0 +1,16 @@
+{
+  "name": "lerna-apps",
+  "bin": "build/lerna-apps.js",
+  "version": "1.0.0",
+  "description": "A CLI tool enabling comfortable lerna use for Applications rather than NPM Packages.",
+  "main": "index.js",
+  "author": "Fyodor Yakimchouk",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "build": "tsc"
+  },
+  "dependencies": {
+    "typescript": "^4.0.2"
+  }
+}
