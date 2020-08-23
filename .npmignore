@@ -1,3 +1,5 @@
 node_modules
 src
 sample-project-project
+.idea
+.circleci
