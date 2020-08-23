@@ -15,24 +15,20 @@ export class BootstrapCommand extends OriginalBootstrap.BootstrapCommand {
         // filtering out packages that no-one depends on, no point in packaging those
         const depsToPackage: any[] = this.filteredPackages.filter((pkg: any) => this.targetGraph.get(pkg.name).localDependents.size > 0);
 
-        const tracker = this.logger.newItem('package');
+        let tracker = this.logger.newItem('package');
+        tracker.addWork(depsToPackage.length);
+        const tarToCleanUp: string[] = [];
 
         // create tar files for every package
         for (const pkg of depsToPackage) {
             // TODO: add NPM support, will require some fiddling with tarball filename
+            // TODO: later reuse this method for pre-deployment step
             // need to randomly generate tarball name for those dependencies
             pkg.tarName = `${pkg.name}${(new Date).getTime()}.tgz`;
             pkg.tarLocation = path.join(pkg.location, pkg.tarName);
             const opts = getExecOpts(pkg, this.npmConfig.registry);
             await ChildProcessUtilities.exec('yarn', ['pack', '--filename', pkg.tarName], opts);
-            tracker.completeWork(1);
             this.logger.silly('pack', pkg.name, 'Finished packing');
-        }
-        tracker.finish();
-
-        const tarToCleanUp: string[] = [];
-        // copy tar files to dependants location
-        for (const pkg of depsToPackage) {
             const localDependents = this.targetGraph.get(pkg.name).localDependents.keys();
 
             for (const dependantName of localDependents) {
@@ -41,9 +37,15 @@ export class BootstrapCommand extends OriginalBootstrap.BootstrapCommand {
                 tarToCleanUp.push(path.join(dependantPackage.location, pkg.tarName));
             }
             fs.unlinkSync(pkg.tarLocation);
+            tracker.completeWork(1);
         }
 
+        tracker.finish();
+
         const packagesToRelink: any[] = this.filteredPackages.filter((pkg: any) => this.targetGraph.get(pkg.name).localDependencies.size > 0);
+
+        tracker = this.logger.newItem('relink');
+        tracker.addWork(packagesToRelink.length);
 
         for (const pkg of packagesToRelink) {
             // getting dependency name for the package
@@ -76,6 +78,7 @@ export class BootstrapCommand extends OriginalBootstrap.BootstrapCommand {
                 for (const dependencyName of dependencyNames) {
                     try {
                         // removing the symlink
+                        this.logger.verbose('bootstrap', `removing symlink ${dependencyName} from ${pkg.name}`);
                         fs.unlinkSync(path.join(pkg.location, 'node_modules', dependencyName));
                         await ChildProcessUtilities.exec('yarn', ['remove', dependencyName], opts);
                     } catch (e) {
@@ -83,20 +86,26 @@ export class BootstrapCommand extends OriginalBootstrap.BootstrapCommand {
                     }
                 }
 
-                await ChildProcessUtilities.spawnStreaming('yarn', ['add', ...tarFiles], opts);
+                this.logger.verbose('bootstrap', `adding ${tarFiles.join(', ')} to ${pkg.name}`);
+                await ChildProcessUtilities.exec('yarn', ['add', ...tarFiles], opts);
             } catch (e) {
-
+                this.logger.error('bootstrap', 'Error occured during relinking', e);
+                // need to log and rethrow here
             } finally {
+                this.logger.verbose('bootstrap', `restoring package manifest and lock file for ${pkg.name}`);
                 // restore package.json in any case
                 fs.writeFileSync(pkg.manifestLocation, packageJsonCache);
                 // restore the lock file in any case
                 fs.writeFileSync(path.join(pkg.location, 'yarn.lock'), lockFileCache);
+                tracker.completeWork(1);
             }
         }
 
         for (const tar of tarToCleanUp) {
             fs.unlinkSync(tar);
         }
+
+        tracker.finish();
     }
 }
 
