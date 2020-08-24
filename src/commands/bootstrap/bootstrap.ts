@@ -1,19 +1,17 @@
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const OriginalBootstrap = require('@lerna/bootstrap');
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const ChildProcessUtilities = require('@lerna/child-process');
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const getExecOpts = require('@lerna/get-npm-exec-opts');
+import {Package} from '@lerna/package';
+import * as ChildProcessUtilities from '@lerna/child-process';
+import getExecOpts from '@lerna/get-npm-exec-opts';
 import fs from 'fs';
 import path from 'path';
+import { BootstrapCommand } from '@lerna/bootstrap';
 
-export class BootstrapCommand extends OriginalBootstrap.BootstrapCommand {
+export class ExtendedBootstrapCommand extends BootstrapCommand {
     public async execute(): Promise<void> {
         await super.execute();
         this.logger.info('', 'Performing post linking');
 
         // filtering out packages that no-one depends on, no point in packaging those
-        const depsToPackage: any[] = this.filteredPackages.filter((pkg: any) => this.targetGraph.get(pkg.name).localDependents.size > 0);
+        const depsToPackage: Package[] = this.filteredPackages.filter((pkg: Package) => this.targetGraph.get(pkg.name).localDependents.size > 0);
 
         let tracker = this.logger.newItem('package');
         tracker.addWork(depsToPackage.length);
@@ -32,9 +30,11 @@ export class BootstrapCommand extends OriginalBootstrap.BootstrapCommand {
             const localDependents = this.targetGraph.get(pkg.name).localDependents.keys();
 
             for (const dependantName of localDependents) {
-                const dependantPackage = this.filteredPackages.find((searchPkg: any) => searchPkg.name === dependantName);
-                fs.copyFileSync(pkg.tarLocation, path.join(dependantPackage.location, pkg.tarName));
-                tarToCleanUp.push(path.join(dependantPackage.location, pkg.tarName));
+                const dependantPackage = this.filteredPackages.find((searchPkg: Package) => searchPkg.name === dependantName);
+                if (dependantPackage) {
+                    fs.copyFileSync(pkg.tarLocation, path.join(dependantPackage.location, pkg.tarName));
+                    tarToCleanUp.push(path.join(dependantPackage.location, pkg.tarName));
+                }
             }
             fs.unlinkSync(pkg.tarLocation);
             tracker.completeWork(1);
@@ -68,8 +68,10 @@ export class BootstrapCommand extends OriginalBootstrap.BootstrapCommand {
             try {
                 const tarFiles = [];
                 for (const dependencyName of dependencyNames) {
-                    const dependencyPkg = this.filteredPackages.find((searchPkg: any) => searchPkg.name === dependencyName);
-                    tarFiles.push(`file:./${dependencyPkg.tarName}`);
+                    const dependencyPkg = this.filteredPackages.find((searchPkg: Package) => searchPkg.name === dependencyName);
+                    if (dependencyPkg) {
+                        tarFiles.push(`file:./${dependencyPkg.tarName}`);
+                    }
                 }
 
                 const opts = getExecOpts(pkg, this.npmConfig.registry);
@@ -109,8 +111,8 @@ export class BootstrapCommand extends OriginalBootstrap.BootstrapCommand {
     }
 }
 
-export default function factory(argv: unknown): BootstrapCommand {
+export default function factory(argv: unknown): ExtendedBootstrapCommand {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    return new BootstrapCommand(argv);
+    return new ExtendedBootstrapCommand(argv);
 }
