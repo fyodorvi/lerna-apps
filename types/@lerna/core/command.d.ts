@@ -3,5 +3,7 @@ declare module '@lerna/command' {
 
     export class Command {
         protected logger: npmlog.Logger;
+
+        async execute(): Promise<void>;
     }
 }

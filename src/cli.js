@@ -3,7 +3,6 @@
 /* eslint-disable */
 // original commands
 const cli = require("@lerna/cli");
-const addCmd = require("@lerna/add/command");
 const changedCmd = require("@lerna/changed/command");
 const cleanCmd = require("@lerna/clean/command");
 const createCmd = require("@lerna/create/command");
@@ -21,6 +20,7 @@ const pkg = require("lerna/package.json");
 
 // override commands
 const bootstrapCmd = require("./commands/bootstrap/command");
+const addCmd = require("./commands/add/command");
 
 function main(argv) {
     const context = {

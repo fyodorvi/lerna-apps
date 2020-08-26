@@ -9,6 +9,5 @@ declare module '@lerna/bootstrap' {
             registry: string;
         };
         protected targetGraph: PackageGraph;
-        async execute(): Promise<void>;
     }
 }

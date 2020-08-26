@@ -8,7 +8,7 @@ import { BootstrapCommand } from '@lerna/bootstrap';
 export class ExtendedBootstrapCommand extends BootstrapCommand {
     public async execute(): Promise<void> {
         await super.execute();
-        this.logger.info('', 'Performing post linking');
+        this.logger.info('lerna-apps', 'Performing packing, post-linking and installing');
 
         // filtering out packages that no-one depends on, no point in packaging those
         const depsToPackage: Package[] = this.filteredPackages.filter((pkg: Package) => this.targetGraph.get(pkg.name).localDependents.size > 0);
@@ -80,7 +80,7 @@ export class ExtendedBootstrapCommand extends BootstrapCommand {
                 for (const dependencyName of dependencyNames) {
                     try {
                         // removing the symlink
-                        this.logger.verbose('bootstrap', `removing symlink ${dependencyName} from ${pkg.name}`);
+                        this.logger.verbose('lerna-apps', `removing symlink ${dependencyName} from ${pkg.name}`);
                         fs.unlinkSync(path.join(pkg.location, 'node_modules', dependencyName));
                         await ChildProcessUtilities.exec('yarn', ['remove', dependencyName], opts);
                     } catch (e) {
@@ -88,13 +88,13 @@ export class ExtendedBootstrapCommand extends BootstrapCommand {
                     }
                 }
 
-                this.logger.verbose('bootstrap', `adding ${tarFiles.join(', ')} to ${pkg.name}`);
+                this.logger.verbose('lerna-apps', `adding ${tarFiles.join(', ')} to ${pkg.name}`);
                 await ChildProcessUtilities.exec('yarn', ['add', ...tarFiles], opts);
             } catch (e) {
-                this.logger.error('bootstrap', 'Error occured during relinking', e);
+                this.logger.error('lerna-apps', 'Error occured during relinking', e);
                 // need to log and rethrow here
             } finally {
-                this.logger.verbose('bootstrap', `restoring package manifest and lock file for ${pkg.name}`);
+                this.logger.verbose('lerna-apps', `restoring package manifest and lock file for ${pkg.name}`);
                 // restore package.json in any case
                 fs.writeFileSync(pkg.manifestLocation, packageJsonCache);
                 // restore the lock file in any case
@@ -108,6 +108,7 @@ export class ExtendedBootstrapCommand extends BootstrapCommand {
         }
 
         tracker.finish();
+        this.logger.info('lerna-apps', 'Relinked and reinstalled packages');
     }
 }
 
