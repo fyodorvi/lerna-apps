@@ -4,6 +4,7 @@ import getExecOpts from '@lerna/get-npm-exec-opts';
 import fs from 'fs';
 import path from 'path';
 import { BootstrapCommand } from '@lerna/bootstrap';
+import * as lockfile from '@yarnpkg/lockfile';
 
 export class ExtendedBootstrapCommand extends BootstrapCommand {
     public async execute(): Promise<void> {
@@ -50,9 +51,6 @@ export class ExtendedBootstrapCommand extends BootstrapCommand {
         for (const pkg of packagesToRelink) {
             // getting dependency name for the package
             const dependencyNames: string[] = Array.from(this.targetGraph.get(pkg.name).localDependencies.keys());
-            // remember the lock file
-            // TODO: support npm lock files here
-            const lockFileCache = fs.readFileSync(path.join(pkg.location, 'yarn.lock'), 'utf-8');
 
             // remember package.json of every dependant package
             const packageJsonCache = fs.readFileSync(pkg.manifestLocation, 'utf-8');
@@ -66,11 +64,11 @@ export class ExtendedBootstrapCommand extends BootstrapCommand {
             fs.writeFileSync(pkg.manifestLocation, JSON.stringify(parsedPackageJson, undefined, '\t'));
 
             try {
-                const tarFiles = [];
+                const dependencyPkgs: Package[] = [];
                 for (const dependencyName of dependencyNames) {
                     const dependencyPkg = this.filteredPackages.find((searchPkg: Package) => searchPkg.name === dependencyName);
-                    if (dependencyPkg) {
-                        tarFiles.push(`file:./${dependencyPkg.tarName}`);
+                    if (dependencyPkg && dependencyPkg.tarName) {
+                        dependencyPkgs.push(dependencyPkg);
                     }
                 }
 
@@ -80,7 +78,7 @@ export class ExtendedBootstrapCommand extends BootstrapCommand {
                 for (const dependencyName of dependencyNames) {
                     try {
                         // removing the symlink
-                        this.logger.verbose('lerna-apps', `removing symlink ${dependencyName} from ${pkg.name}`);
+                        this.logger.verbose('lerna-apps', `Removing symlink ${dependencyName} from ${pkg.name}`);
                         fs.unlinkSync(path.join(pkg.location, 'node_modules', dependencyName));
                         await ChildProcessUtilities.exec('yarn', ['remove', dependencyName], opts);
                     } catch (e) {
@@ -88,17 +86,39 @@ export class ExtendedBootstrapCommand extends BootstrapCommand {
                     }
                 }
 
-                this.logger.verbose('lerna-apps', `adding ${tarFiles.join(', ')} to ${pkg.name}`);
+                const tarFiles: string[] = dependencyPkgs.map((depPkg) => (`file:./${depPkg.tarName as string}`));
+                this.logger.verbose('lerna-apps', `Adding ${tarFiles.join(', ')} to ${pkg.name}`);
                 await ChildProcessUtilities.exec('yarn', ['add', ...tarFiles], opts);
+
+                // TODO: support npm here
+                // lock file will updated with proper dependencies locked in, need to remove tar dependencies from it (the make no sense)
+                this.logger.verbose('lerna-apps', `Cleaning up lock file for ${pkg.name}`);
+                const lockFileLocation = path.join(pkg.location, 'yarn.lock');
+                const lockFile = fs.readFileSync(lockFileLocation, 'utf-8');
+                const lockFileJson = lockfile.parse(lockFile);
+
+                for (const dependencyPkg of dependencyPkgs) {
+                    const depPkgReference = `${dependencyPkg.name}@file:./${dependencyPkg.tarName}`;
+                    if (lockFileJson.object[depPkgReference]) {
+                        this.logger.verbose('lerna-apps', `Removed reference of ${depPkgReference} from ${lockFileLocation}`);
+                        delete lockFileJson.object[depPkgReference];
+                    } else {
+                        this.logger.error('lerna-apps', `Could not find ${depPkgReference} in ${lockFileLocation}`);
+                    }
+                }
+
+                const updateLockFile = lockfile.stringify(lockFileJson.object);
+                fs.writeFileSync(lockFileLocation, updateLockFile);
+                this.logger.verbose('lerna-apps', `Done cleaning up lock file for ${pkg.name}`);
             } catch (e) {
                 this.logger.error('lerna-apps', 'Error occured during relinking', e);
                 // need to log and rethrow here
             } finally {
-                this.logger.verbose('lerna-apps', `restoring package manifest and lock file for ${pkg.name}`);
+                this.logger.verbose('lerna-apps', `Restoring package manifest and lock file for ${pkg.name}`);
                 // restore package.json in any case
                 fs.writeFileSync(pkg.manifestLocation, packageJsonCache);
                 // restore the lock file in any case
-                fs.writeFileSync(path.join(pkg.location, 'yarn.lock'), lockFileCache);
+                //fs.writeFileSync(path.join(pkg.location, 'yarn.lock'), lockFileCache);
                 tracker.completeWork(1);
             }
         }

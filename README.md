@@ -50,6 +50,22 @@ of dependencies of different versions (when there's a clashing dependency one of
 
 **Note: if you are using Lerna hoisting or Yarn Workspaces this module is not for you. You might look into using [nx](https://github.com/nrwl/nx) instead.**
 
+Third issue: lock file. Since none of as packages assumed as "final destination", Lerna does not provide any lock file,
+which is crucial when building application. Example
+
+```
+packages
+   \ moduleA
+      - depends on momentjs
+      yarn.lock
+   \ moduleB
+      - depends on mobuleA
+      yarn.lock
+```
+
+In the example above moduleB lock file should contain moment record, however it won't since Lerna does not actally install
+the package, it only symlinks it. 
+
 ## The solution
 
 Lerna-apps extends several original Lerna functions, refer to the details below.
@@ -59,7 +75,7 @@ Lerna-apps extends several original Lerna functions, refer to the details below.
 Bootstrap works the same way as the original once, with one extension at the end of the process: 
 symlinks for local packages are deleted, local packages are `pack`ed and added to dependants, `package.json`
 and lock files are preserved in their original state. This way dependencies from local packages are properly installed
-by NPM/Yarn.
+by NPM/Yarn. In the end, local packages are removed from dependants lock files.
 
 Since everything gets properly packaged instead of symlinking you need to re-run bootstrap each time you change a shared packaged.
 
