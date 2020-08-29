@@ -12,6 +12,7 @@
   "scripts": {
     "build": "tsc",
     "lint": "eslint src",
+    "test": "jest",
     "watch": "tsc -w"
   },
   "dependencies": {
