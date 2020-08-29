@@ -3,3 +3,4 @@ src
 sample-project-project
 .idea
 .circleci
+build/tests

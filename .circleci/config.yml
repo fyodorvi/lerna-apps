@@ -1,3 +1,34 @@
+commands:
+  bootstrap:
+    steps:
+      - run:
+          name: Init repository
+          command: ./init.sh
+      - run:
+          name: Install Dependencies
+          command: yarn install
+  lint:
+    steps:
+      - run:
+          name: Lint
+          command: yarn lint
+  build:
+    steps:
+      - run:
+          name: Build
+          command: yarn build
+  test:
+    steps:
+      - run:
+          name: Test
+          command: yarn test
+          environment:
+            JEST_JUNIT_OUTPUT_DIR: ./reports/junit/
+      - store_test_results:
+          path: ./reports/junit/
+      - store_artifacts:
+          path: ./reports/junit
+
 executors:
   default:
     docker:
@@ -13,31 +44,21 @@ jobs:
     executor: default
     steps:
       - checkout
-      - run:
-          name: Install Dependencies
-          command: yarn install
-      - run:
-          name: Lint
-          command: yarn lint
-      - run:
-          name: Build
-          command: yarn build
+      - bootstrap
+      - lint
+      - build
+      - test
       - run:
           name: Release
           command: yarn semantic-release --ci
-  build:
+  build-test:
     executor: default
     steps:
       - checkout
-      - run:
-          name: Install Dependencies
-          command: yarn install
-      - run:
-          name: Lint
-          command: yarn lint
-      - run:
-          name: Build
-          command: yarn build
+      - bootstrap
+      - lint
+      - build
+      - test
 
 ################################################################################
 # WORKFLOWS
@@ -46,7 +67,7 @@ workflows:
   version: 2
   PR:
     jobs:
-      - build:
+      - build-test:
           filters:
             branches:
               ignore:
