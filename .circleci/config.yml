@@ -22,17 +22,22 @@ commands:
       - run:
           name: Test
           command: yarn test --reporters=default --reporters=jest-junit
+
+    ### running tests messes up with the CWD, junit reported cannot be directed to write report to a proper dir
+      - run:
+          name: Move Test Report
+          command: |
+            mkdir reports
+            mv junit.xml ./reports
       - store_test_results:
-          path: ./reports/junit/
+          path: ./reports/
       - store_artifacts:
-          path: ./reports/junit
+          path: ./reports
 
 executors:
   default:
     docker:
       - image: circleci/node
-    environment:
-      JEST_JUNIT_OUTPUT_DIR: ./reports/junit/
 
 ################################################################################
 # JOBS
