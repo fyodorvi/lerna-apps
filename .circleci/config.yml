@@ -29,6 +29,7 @@ commands:
           command: |
             mkdir reports
             mv junit.xml ./reports
+          when: always
       - store_test_results:
           path: ./reports/
       - store_artifacts:
