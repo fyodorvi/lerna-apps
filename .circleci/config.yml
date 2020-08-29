@@ -22,8 +22,6 @@ commands:
       - run:
           name: Test
           command: yarn test --reporters=default --reporters=jest-junit
-          environment:
-            JEST_JUNIT_OUTPUT_DIR: ./reports/junit/
       - store_test_results:
           path: ./reports/junit/
       - store_artifacts:
@@ -33,6 +31,8 @@ executors:
   default:
     docker:
       - image: circleci/node
+    environment:
+      JEST_JUNIT_OUTPUT_DIR: ./reports/junit/
 
 ################################################################################
 # JOBS
