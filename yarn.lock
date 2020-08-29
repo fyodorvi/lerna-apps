@@ -598,8 +598,8 @@
 "@lerna-test/clone-fixture@file:tests/.lerna-source/helpers/clone-fixture":
   version "0.0.0-test-only"
   dependencies:
-    "@lerna-test/git-init" "file:../../Library/Caches/Yarn/v6/npm-@lerna-test-clone-fixture-0.0.0-test-only-a6ea36c1-3e27-45b8-a63d-645fb00113b1-1598661042405/node_modules/@lerna-test/git-init"
-    "@lerna-test/init-fixture" "file:../../Library/Caches/Yarn/v6/npm-@lerna-test-clone-fixture-0.0.0-test-only-a6ea36c1-3e27-45b8-a63d-645fb00113b1-1598661042405/node_modules/@lerna-test/init-fixture"
+    "@lerna-test/git-init" "file:../../Library/Caches/Yarn/v6/npm-@lerna-test-clone-fixture-0.0.0-test-only-1dd87165-60cd-4e2a-b334-24adb373f045-1598662134445/node_modules/@lerna-test/git-init"
+    "@lerna-test/init-fixture" "file:../../Library/Caches/Yarn/v6/npm-@lerna-test-clone-fixture-0.0.0-test-only-1dd87165-60cd-4e2a-b334-24adb373f045-1598662134445/node_modules/@lerna-test/init-fixture"
     execa "^1.0.0"
     file-url "^2.0.2"
     tempy "^0.2.1"
@@ -607,20 +607,20 @@
 "@lerna-test/command-runner@file:tests/.lerna-source/helpers/command-runner":
   version "0.0.0-test-only"
   dependencies:
-    "@lerna/cli" "file:../../Library/Caches/Yarn/v6/npm-@lerna-test-command-runner-0.0.0-test-only-1cdb42f7-4062-407a-80f5-3c3bd077cb5f-1598661042429/node_modules/core/cli"
+    "@lerna/cli" "file:../../Library/Caches/Yarn/v6/npm-@lerna-test-command-runner-0.0.0-test-only-0c83eaf7-eab8-4d0d-a52c-466f388ebd19-1598662134460/node_modules/core/cli"
 
 "@lerna-test/commit-change-to-package@file:tests/.lerna-source/helpers/commit-change-to-package":
   version "0.0.0-test-only"
   dependencies:
-    "@lerna-test/git-add" "file:../../Library/Caches/Yarn/v6/npm-@lerna-test-commit-change-to-package-0.0.0-test-only-c25e15ad-72bc-488b-8bee-88c424020f65-1598661042460/node_modules/@lerna-test/git-add"
-    "@lerna-test/git-commit" "file:../../Library/Caches/Yarn/v6/npm-@lerna-test-commit-change-to-package-0.0.0-test-only-c25e15ad-72bc-488b-8bee-88c424020f65-1598661042460/node_modules/@lerna-test/git-commit"
+    "@lerna-test/git-add" "file:../../Library/Caches/Yarn/v6/npm-@lerna-test-commit-change-to-package-0.0.0-test-only-4d50fe02-df07-4064-879e-1b0743df64fd-1598662134480/node_modules/@lerna-test/git-add"
+    "@lerna-test/git-commit" "file:../../Library/Caches/Yarn/v6/npm-@lerna-test-commit-change-to-package-0.0.0-test-only-4d50fe02-df07-4064-879e-1b0743df64fd-1598662134480/node_modules/@lerna-test/git-commit"
     load-json-file "^5.3.0"
     write-json-file "^3.2.0"
 
 "@lerna-test/copy-fixture@file:tests/.lerna-source/helpers/copy-fixture":
   version "0.0.0-test-only"
   dependencies:
-    "@lerna-test/find-fixture" "file:../../Library/Caches/Yarn/v6/npm-@lerna-test-copy-fixture-0.0.0-test-only-f6d049e5-a7cb-4d1d-a711-73bf5d57d399-1598661042414/node_modules/@lerna-test/find-fixture"
+    "@lerna-test/find-fixture" "file:../../Library/Caches/Yarn/v6/npm-@lerna-test-copy-fixture-0.0.0-test-only-a96fde4e-6f1f-4fd9-9837-e1cb829655ec-1598662134453/node_modules/@lerna-test/find-fixture"
     fs-extra "^8.1.0"
 
 "@lerna-test/figgy-pudding-matchers@file:tests/.lerna-source/helpers/figgy-pudding-matchers":
@@ -679,19 +679,19 @@
 "@lerna-test/init-fixture@file:tests/.lerna-source/helpers/init-fixture":
   version "0.0.0-test-only"
   dependencies:
-    "@lerna-test/copy-fixture" "file:../../Library/Caches/Yarn/v6/npm-@lerna-test-init-fixture-0.0.0-test-only-826af6b7-ddd2-4ec9-a2d4-b1d20366e616-1598661042411/node_modules/@lerna-test/copy-fixture"
-    "@lerna-test/git-add" "file:../../Library/Caches/Yarn/v6/npm-@lerna-test-init-fixture-0.0.0-test-only-826af6b7-ddd2-4ec9-a2d4-b1d20366e616-1598661042411/node_modules/@lerna-test/git-add"
-    "@lerna-test/git-commit" "file:../../Library/Caches/Yarn/v6/npm-@lerna-test-init-fixture-0.0.0-test-only-826af6b7-ddd2-4ec9-a2d4-b1d20366e616-1598661042411/node_modules/@lerna-test/git-commit"
-    "@lerna-test/git-init" "file:../../Library/Caches/Yarn/v6/npm-@lerna-test-init-fixture-0.0.0-test-only-826af6b7-ddd2-4ec9-a2d4-b1d20366e616-1598661042411/node_modules/@lerna-test/git-init"
+    "@lerna-test/copy-fixture" "file:../../Library/Caches/Yarn/v6/npm-@lerna-test-init-fixture-0.0.0-test-only-6479cb72-71d7-4126-a8eb-3f0281079f98-1598662134451/node_modules/@lerna-test/copy-fixture"
+    "@lerna-test/git-add" "file:../../Library/Caches/Yarn/v6/npm-@lerna-test-init-fixture-0.0.0-test-only-6479cb72-71d7-4126-a8eb-3f0281079f98-1598662134451/node_modules/@lerna-test/git-add"
+    "@lerna-test/git-commit" "file:../../Library/Caches/Yarn/v6/npm-@lerna-test-init-fixture-0.0.0-test-only-6479cb72-71d7-4126-a8eb-3f0281079f98-1598662134451/node_modules/@lerna-test/git-commit"
+    "@lerna-test/git-init" "file:../../Library/Caches/Yarn/v6/npm-@lerna-test-init-fixture-0.0.0-test-only-6479cb72-71d7-4126-a8eb-3f0281079f98-1598662134451/node_modules/@lerna-test/git-init"
     tempy "^0.2.1"
 
 "@lerna-test/init-named-fixture@file:tests/.lerna-source/helpers/init-named-fixture":
   version "0.0.0-test-only"
   dependencies:
-    "@lerna-test/copy-fixture" "file:../../Library/Caches/Yarn/v6/npm-@lerna-test-init-named-fixture-0.0.0-test-only-ce4bff24-17aa-4a80-b527-382d5ba83db9-1598661042543/node_modules/@lerna-test/copy-fixture"
-    "@lerna-test/git-add" "file:../../Library/Caches/Yarn/v6/npm-@lerna-test-init-named-fixture-0.0.0-test-only-ce4bff24-17aa-4a80-b527-382d5ba83db9-1598661042543/node_modules/@lerna-test/git-add"
-    "@lerna-test/git-commit" "file:../../Library/Caches/Yarn/v6/npm-@lerna-test-init-named-fixture-0.0.0-test-only-ce4bff24-17aa-4a80-b527-382d5ba83db9-1598661042543/node_modules/@lerna-test/git-commit"
-    "@lerna-test/git-init" "file:../../Library/Caches/Yarn/v6/npm-@lerna-test-init-named-fixture-0.0.0-test-only-ce4bff24-17aa-4a80-b527-382d5ba83db9-1598661042543/node_modules/@lerna-test/git-init"
+    "@lerna-test/copy-fixture" "file:../../Library/Caches/Yarn/v6/npm-@lerna-test-init-named-fixture-0.0.0-test-only-2ad5c7d2-0ee2-437a-a811-a102167ee507-1598662134524/node_modules/@lerna-test/copy-fixture"
+    "@lerna-test/git-add" "file:../../Library/Caches/Yarn/v6/npm-@lerna-test-init-named-fixture-0.0.0-test-only-2ad5c7d2-0ee2-437a-a811-a102167ee507-1598662134524/node_modules/@lerna-test/git-add"
+    "@lerna-test/git-commit" "file:../../Library/Caches/Yarn/v6/npm-@lerna-test-init-named-fixture-0.0.0-test-only-2ad5c7d2-0ee2-437a-a811-a102167ee507-1598662134524/node_modules/@lerna-test/git-commit"
+    "@lerna-test/git-init" "file:../../Library/Caches/Yarn/v6/npm-@lerna-test-init-named-fixture-0.0.0-test-only-2ad5c7d2-0ee2-437a-a811-a102167ee507-1598662134524/node_modules/@lerna-test/git-init"
     fs-extra "^8.1.0"
     tempy "^0.2.1"
 
@@ -704,7 +704,7 @@
 "@lerna-test/logging-output@file:tests/.lerna-source/helpers/logging-output":
   version "0.0.0-test-only"
   dependencies:
-    "@lerna-test/multi-line-trim-right" "file:../../Library/Caches/Yarn/v6/npm-@lerna-test-logging-output-0.0.0-test-only-a7bf975f-c5b4-4f83-9346-5ae9fdac773a-1598661042554/node_modules/@lerna-test/multi-line-trim-right"
+    "@lerna-test/multi-line-trim-right" "file:../../Library/Caches/Yarn/v6/npm-@lerna-test-logging-output-0.0.0-test-only-a8a91803-2bde-4f3f-97b6-92eda635946c-1598662134530/node_modules/@lerna-test/multi-line-trim-right"
     npmlog "^4.1.2"
 
 "@lerna-test/multi-line-trim-right@file:tests/.lerna-source/helpers/multi-line-trim-right":
@@ -720,13 +720,13 @@
 "@lerna-test/pkg-matchers@file:tests/.lerna-source/helpers/pkg-matchers":
   version "0.0.0-test-only"
   dependencies:
-    "@lerna/package" "file:../../Library/Caches/Yarn/v6/npm-@lerna-test-pkg-matchers-0.0.0-test-only-5408e70d-7e7a-4177-bb0c-16df40a567c8-1598661042559/node_modules/core/package"
+    "@lerna/package" "file:../../Library/Caches/Yarn/v6/npm-@lerna-test-pkg-matchers-0.0.0-test-only-e6a3d10d-b0a4-47a9-a8fc-e548e1c1601e-1598662134533/node_modules/core/package"
     semver "^6.2.0"
 
 "@lerna-test/serialize-changelog@file:tests/.lerna-source/helpers/serialize-changelog":
   version "0.0.0-test-only"
   dependencies:
-    "@lerna-test/serialize-git-sha" "file:../../Library/Caches/Yarn/v6/npm-@lerna-test-serialize-changelog-0.0.0-test-only-95f02ee5-b13d-4a90-896c-1166ae2d2648-1598661042569/node_modules/@lerna-test/serialize-git-sha"
+    "@lerna-test/serialize-git-sha" "file:../../Library/Caches/Yarn/v6/npm-@lerna-test-serialize-changelog-0.0.0-test-only-ed54f2cd-47e6-43f5-8908-55352c8f8873-1598662134538/node_modules/@lerna-test/serialize-git-sha"
     normalize-newline "^3.0.0"
 
 "@lerna-test/serialize-git-sha@file:tests/.lerna-source/helpers/serialize-git-sha":
@@ -735,8 +735,8 @@
 "@lerna-test/serialize-placeholders@file:tests/.lerna-source/helpers/serialize-placeholders":
   version "0.0.0-test-only"
   dependencies:
-    "@lerna-test/serialize-tempdir" "file:../../Library/Caches/Yarn/v6/npm-@lerna-test-serialize-placeholders-0.0.0-test-only-737b7785-b239-439c-bccb-5eea940e7c41-1598661042572/node_modules/@lerna-test/serialize-tempdir"
-    "@lerna-test/serialize-windows-paths" "file:../../Library/Caches/Yarn/v6/npm-@lerna-test-serialize-placeholders-0.0.0-test-only-737b7785-b239-439c-bccb-5eea940e7c41-1598661042572/node_modules/@lerna-test/serialize-windows-paths"
+    "@lerna-test/serialize-tempdir" "file:../../Library/Caches/Yarn/v6/npm-@lerna-test-serialize-placeholders-0.0.0-test-only-aa271752-ae14-4afa-9223-435d8dcb9d97-1598662134539/node_modules/@lerna-test/serialize-tempdir"
+    "@lerna-test/serialize-windows-paths" "file:../../Library/Caches/Yarn/v6/npm-@lerna-test-serialize-placeholders-0.0.0-test-only-aa271752-ae14-4afa-9223-435d8dcb9d97-1598662134539/node_modules/@lerna-test/serialize-windows-paths"
     normalize-newline "^3.0.0"
 
 "@lerna-test/serialize-tempdir@file:tests/.lerna-source/helpers/serialize-tempdir":
@@ -755,7 +755,7 @@
 "@lerna-test/show-commit@file:tests/.lerna-source/helpers/show-commit":
   version "0.0.0-test-only"
   dependencies:
-    "@lerna-test/serialize-git-sha" "file:../../Library/Caches/Yarn/v6/npm-@lerna-test-show-commit-0.0.0-test-only-fcfe06dc-11d5-4211-bfa6-ec0e9cf94d26-1598661042577/node_modules/@lerna-test/serialize-git-sha"
+    "@lerna-test/serialize-git-sha" "file:../../Library/Caches/Yarn/v6/npm-@lerna-test-show-commit-0.0.0-test-only-6e967bd0-b3cc-4177-b985-96fd6a3d2ac8-1598662134542/node_modules/@lerna-test/serialize-git-sha"
     execa "^1.0.0"
 
 "@lerna-test/silence-logging@file:tests/.lerna-source/helpers/silence-logging":
@@ -858,7 +858,7 @@
 "@lerna/cli@3.18.5", "@lerna/cli@file:tests/.lerna-source/core/cli":
   version "3.18.5"
   dependencies:
-    "@lerna/global-options" "file:../../Library/Caches/Yarn/v6/npm-@lerna-cli-3.18.5-89b9f50f-4409-4b6f-add3-aa85b532f85a-1598661042431/node_modules/@lerna/global-options"
+    "@lerna/global-options" "file:../../Library/Caches/Yarn/v6/npm-@lerna-cli-3.18.5-7d31913c-5422-475e-b78c-94cbcba5cc05-1598662134462/node_modules/@lerna/global-options"
     dedent "^0.7.0"
     npmlog "^4.1.2"
     yargs "^14.2.2"
@@ -5305,6 +5305,16 @@ jest-jasmine2@^26.4.2:
     pretty-format "^26.4.2"
     throat "^5.0.0"
 
+jest-junit@^11.1.0:
+  version "11.1.0"
+  resolved "https://registry.yarnpkg.com/jest-junit/-/jest-junit-11.1.0.tgz#79cd53948e44d62b2b30fa23ea0d7a899d2c8d7a"
+  integrity sha512-c2LFOyKY7+ZxL5zSu+WHmHfsJ2wqbOpeYJ4Uu26yMhFxny2J2NQj6AVS7M+Eaxji9Q/oIDDK5tQy0DGzDp9xOw==
+  dependencies:
+    mkdirp "^1.0.4"
+    strip-ansi "^5.2.0"
+    uuid "^3.3.3"
+    xml "^1.0.1"
+
 jest-leak-detector@^26.4.2:
   version "26.4.2"
   resolved "https://registry.yarnpkg.com/jest-leak-detector/-/jest-leak-detector-26.4.2.tgz#c73e2fa8757bf905f6f66fb9e0070b70fa0f573f"
@@ -6442,7 +6452,7 @@ mkdirp-promise@^5.0.1:
   dependencies:
     mkdirp "*"
 
-mkdirp@*, mkdirp@1.x:
+mkdirp@*, mkdirp@1.x, mkdirp@^1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-1.0.4.tgz#3eb5ed62622756d79a5f0e2a221dfebad75c2f7e"
   integrity sha512-vVqVZQyf3WLx2Shd0qJ9xuvqgAyKPLAiqITEtqW0oIUjzo3PePDd6fW9iFz30ef7Ysp/oiWqbhszeGWW2T6Gzw==
@@ -9577,6 +9587,11 @@ xml-name-validator@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/xml-name-validator/-/xml-name-validator-3.0.0.tgz#6ae73e06de4d8c6e47f9fb181f78d648ad457c6a"
   integrity sha512-A5CUptxDsvxKJEU3yO6DuWBSJz/qizqzJKOMIfUJHETbBw/sFaDxgd6fxm1ewUaM0jZ444Fc5vC5ROYurg/4Pw==
+
+xml@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/xml/-/xml-1.0.1.tgz#78ba72020029c5bc87b8a81a3cfcd74b4a2fc1e5"
+  integrity sha1-eLpyAgApxbyHuKgaPPzXS0ovweU=
 
 xmlchars@^2.2.0:
   version "2.2.0"
